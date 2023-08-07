@@ -3,7 +3,39 @@
 
 ![](screenshot.png)
 
-## 缘由：
+# 使用方法：
+## 新建报表：
+直接执行 ReportDesign.EXE
+
+## VFP 中启动时打开已有报表：
+#### 语法：
+```foxpro
+Do ReportDesign.EXE With [tcFrxName], [tnDesignMode], [tcSetDate], [tcCurrency], [tcSelect], [tcConnectionString]
+```
+
+#### 参数说明：
+| 参数 | 描述                    |
+|-------------------|--------------------------------|
+|tcFrxName | 字符型，可选参数，需要打开的报表文件名 |
+|tnDesignMode | 数值型，可选参数，设计模式，可选值：  1 - 报表模式；2 - 所见即所得 (值 2 暂时不支持)  |
+|tcSetDate | 字符型，可选参数，报表需要使用的 Set([Date]) 值 |
+|tcCurrency | 字符型，可选参数，报表需要使用的 Set("Currency", 1) 值 |
+|tcSelect | 字符型，可选参数，与 tcFrxName 对应的数据源(dbf)列表或者 Select 语句（Select 语句暂时不支持） |
+|tcConnectionString | 字符型，可选参数，可以建立远程连接的连接字符串（暂时不支持） |
+
+#### 示例：
+1. 数据源类型为 dbf
+```foxpro
+Do ReportDesign.EXE With "demo.frx", , , , "demo"			&& 数据源为单一 dbf
+Do ReportDesign.EXE With "myreport.frx", , , , "master,slave"		&& 数据源为主从表，表格式为 dbf
+```
+2. 数据源为远程数据源（暂时不支持）
+```foxpro
+Do ReportDesign.EXE With "mytest.frx", , , , "Select Top 1 * From xxx", "Driver={SQL Server};Server=myServerAddress;Database=myDataBase;Uid=myUsername;Pwd=myPassword"
+```
+## 非 VFP 环境下调用：可使用 WINAPI 函数 ShellExecute 执行 ReportDesign.EXE
+
+# 缘由：
 VFP 固有的报表设计器，从 VFP3 已经定型了。至 VFP9，功能改进是有目共睹的，但复杂度也相应提高了不少。但是设计UI，几乎没有改变。对大多数 VFP 程序员来说，VFP 的报表设计器就是鸡肋。
 
 2018年，我初次作为一个职业程序员在改动所在公司的软件架构时，遇到一个在当时状态下无法解决的问题，它一直遗留到我从该公司离职：
@@ -24,7 +56,7 @@ VFP 固有的报表设计器，从 VFP3 已经定型了。至 VFP9，功能改�
 
 但是限于个人的私人情况，此项目至今才基本完成。
 
-## 已实现设计目标：
+# 已实现设计目标：
 1. 它是对象化的。
 
 2. 它的使用是平滑替代 VFP 报表设计器，几乎无需另外学习。并且，提供了一个相对现代的设计UI。
@@ -35,14 +67,14 @@ VFP 固有的报表设计器，从 VFP3 已经定型了。至 VFP9，功能改�
 
 5. 它在一定程度上实现了所见即所得。
 
-## 待实现的设计目标
+# 待实现的设计目标
 1. 可以很方便的在报表设计时提供所谓“第三方”支持，例如条形码/二维码/图表等。
 
 2. 报表的保护
 
 3. 真正的所见即所得
 
-## 更新历史
+# 更新历史
 **2023.08.07**
 
 版本：α1.0.17
