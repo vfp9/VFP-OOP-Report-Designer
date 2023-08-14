@@ -36,6 +36,8 @@ Do ReportDesign.EXE With "mytest.frx", , , , "Select Top 1 * From xxx", "Driver=
 ```
 ## 非 VFP 环境下调用：可使用 WINAPI 函数 ShellExecute 执行 ReportDesign.EXE
 
+## 可选组件为 FoxyPreviewer 。如需使用，解压 FoxyPreviewer.rar 即可(ver:v299z38)。也可将最新版本的 FoxyPreviewer 置于文件夹中。
+
 # 缘由：
 VFP 固有的报表设计器，从 VFP3 已经定型了。至 VFP9，功能改进是有目共睹的，但复杂度也相应提高了不少。但是设计UI，几乎没有改变。对大多数 VFP 程序员来说，VFP 的报表设计器就是鸡肋。
 
@@ -76,6 +78,22 @@ VFP 固有的报表设计器，从 VFP3 已经定型了。至 VFP9，功能改�
 3. 真正的所见即所得
 
 # 更新历史
+**2023.08.14**
+
+版本：β1.0.27
+
+修改：集成报表的 90 引擎
+
+**2023.08.14**
+
+版本：α1.0.26
+
+修改：
+1. 修正带区高度。
+
+新增：
+1. 调整 shape 的高度时，自动调整“内部”竖线的高度。
+2. 
 **2023.08.14**
 
 版本：α1.0.25
