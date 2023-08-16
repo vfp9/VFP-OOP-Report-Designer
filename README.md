@@ -7,33 +7,40 @@
 直接执行 ReportDesign.EXE
 
 ## VFP 中启动时打开已有报表：
-#### 语法：
-```foxpro
-Do ReportDesign.EXE With [tcFrxName], [tnDesignMode], [tcSetDate], [tcCurrency], [tcSelect], [tcConnectionString]
-```
-
 #### 参数说明：
 | 参数 | 描述                    |
 |-------------------|--------------------------------|
 |tcFrxName | 字符型，可选参数，需要打开的报表文件名 |
+|tcCursorList | 字符型，可选参数，与 tcFrxName 对应的数据源列表，cursor 暂不支持！(dbf   注：可以带路径，包括相对路径，表以共享方式打开) |
+|tcSelect | 字符型，可选参数，与 tcFrxName 对应的用于生成 Cursor 的 Select 语句（暂时不支持） |
+|tcConnectionString | 字符型，可选参数，可以建立远程连接的连接字符串（暂时不支持） |
 |tnDesignMode | 数值型，可选参数，设计模式，可选值：  1 - 报表模式；2 - 所见即所得 (值 2 暂时不支持)  |
 |tcSetDate | 字符型，可选参数，报表需要使用的 Set([Date]) 值 |
 |tcCurrency | 字符型，可选参数，报表需要使用的 Set("Currency", 1) 值 |
-|tcSelect | 字符型，可选参数，与 tcFrxName 对应的数据源(dbf)列表或者 Select 语句（Select 语句暂时不支持） |
-|tcConnectionString | 字符型，可选参数，可以建立远程连接的连接字符串（暂时不支持） |
 
 #### 示例：
 1. 数据源类型为 dbf
 ```foxpro
-Do ReportDesign.EXE With "demo.frx", , , , "demo"			&& 数据源为单一 dbf
-Do ReportDesign.EXE With "myreport.frx", , , , "master,slave"		&& 数据源为主从表，表格式为 dbf
-```
-2. 数据源为远程数据源（暂时不支持）
-```foxpro
-Do ReportDesign.EXE With "mytest.frx", , , , "Select Top 1 * From xxx", "Driver={SQL Server};Server=myServerAddress;Database=myDataBase;Uid=myUsername;Pwd=myPassword"
-```
-## 非 VFP 环境下调用：可使用 WINAPI 函数 ShellExecute 执行 ReportDesign.EXE
+Private lnReturn, lpszDir, lpszFile, lpszOpen, lpszParams, fsShowCMD, HWnd
+Local lnReturn As Number, lpszDir As Character,	lpszFile As Character, lpszOpen As Character, lpszParams As Character, fsShowCMD As Number, HWnd As Number
 
+Declare Integer ShellExecute In shell32.Dll Integer, STRING, String, String, STRING, Integer
+Declare Integer GetDesktopWindow IN win32api
+
+m.HWnd = GetDesktopWindow()
+
+m.lpszOpen		= [open]
+m.lpszFile		= [ReportDesign.exe]
+m.lpszParams	= []
+
+*!* 传入多个参数，用空格分隔，如果路径中有空格，使用双引号。
+*!*	m.lpszParams	= [".\Reports\demo2.frx" ".\data\demo.dbf"]		&& 相对路径
+*!*	m.lpszParams	= ["C:\VFP ReportDesign\Reports\demo2.frx" "C:\VFP ReportDesign\data\demo.dbf"]		&& 绝对路径
+
+m.lpszDir		= Sys(5) + Sys(2003)
+m.fsShowCMD		= 0
+m.lnReturn		= ShellExecute(m.HWnd, m.lpszOpen, m.lpszFile, m.lpszParams, m.lpszDir, m.fsShowCMD)
+```
 ## 可选组件为 FoxyPreviewer 。如需使用，解压 FoxyPreviewer.rar 即可(ver:v299z38)。也可将最新版本的 FoxyPreviewer 置于文件夹中。
 
 # 缘由：
@@ -76,6 +83,17 @@ VFP 固有的报表设计器，从 VFP3 已经定型了。至 VFP9，功能改�
 3. 真正的所见即所得
 
 # 更新历史
+**2023.08.17**
+
+版本：β1.0.32
+
+**重要修改**：执行 EXE 时增加可选参数 tcCursorList 并调整参数顺序
+
+其他修改：
+1. 支持带路径的参数，参看示例；
+2. 传入的 dbf 如果不能被以共享方式打开，程序提供错误信息并直接退出；
+3. 通过快速菜单打开报表时，如果指定的 dbf （可以不在 EXE 所在目录或者其子目录中）不能被以共享方式打开，程序会打开默认的报表模板而不是指定的报表
+   
 **2023.08.16**
 
 版本：β1.0.31
