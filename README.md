@@ -20,6 +20,8 @@
 
 #### 示例：
 1. 数据源类型为 dbf
+   
+**VFP的调用方式：**
 ```foxpro
 Private lnReturn, lpszDir, lpszFile, lpszOpen, lpszParams, fsShowCMD, HWnd
 Local lnReturn As Number, lpszDir As Character,	lpszFile As Character, lpszOpen As Character, lpszParams As Character, fsShowCMD As Number, HWnd As Number
