@@ -21,7 +21,7 @@
 #### 示例：
 1. 数据源类型为 dbf
    
-**VFP的调用方式：**
+**VFP 的调用方式：**
 ```foxpro
 Private lnReturn, lpszDir, lpszFile, lpszOpen, lpszParams, fsShowCMD, HWnd
 Local lnReturn As Number, lpszDir As Character,	lpszFile As Character, lpszOpen As Character, lpszParams As Character, fsShowCMD As Number, HWnd As Number
@@ -43,6 +43,156 @@ m.lpszDir		= Sys(5) + Sys(2003)
 m.fsShowCMD		= 0
 m.lnReturn		= ShellExecute(m.HWnd, m.lpszOpen, m.lpszFile, m.lpszParams, m.lpszDir, m.fsShowCMD)
 ```
+**VB6 的调用方式：**
+```basic
+Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" _
+    (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, _
+    ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
+
+Private Declare Function GetDesktopWindow Lib "user32" () As Long
+
+
+Private Sub Command1_Click()
+    ' 定义返回值变量
+    Dim RetVal As Long
+    ' 定义 EXE 文件路径
+    Dim exePath As String
+    ' 定义参数
+    Dim parameters As String
+    ' 定义 EXE 文件所在目录
+    Dim exeDirectory As String
+
+    ' 设置 EXE 文件路径
+    exePath = "reportdesign.exe"
+    ' 设置 EXE 文件所在目录
+    exeDirectory = "C:\VFP ReportDesign"
+
+    parameters = ""
+    
+    ' 设置参数，参数中的路径是相对于 EXE 文件所在目录的
+    ' parameters = """reports\demo2.frx"" ""data\demo.dbf"""
+    
+    ' 设置参数，参数中使用绝对路径
+    ' parameters = """C:\VFP ReportDesign\reports\demo2.frx"" ""C:\VFP ReportDesign\data\demo.dbf"""
+
+
+    ' 调用 ShellExecute 函数执行 EXE 文件
+    RetVal = ShellExecute(GetDesktopWindow(), "open", exePath, parameters, exeDirectory, 1)
+End Sub
+```
+**VC++ 的调用方式：**
+```c
+#include <windows.h>
+#include <shellapi.h>
+
+// WinMain 函数，Windows应用程序的入口点
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
+    // 定义返回值变量
+    HINSTANCE RetVal;
+    // 定义 EXE 文件路径
+    LPCSTR exePath = "reportdesign.exe";
+    // 定义参数
+    LPCSTR parameters = "";
+	// LPCSTR parameters = "reports\\demo2.frx data\\demo.dbf";
+	// LPCSTR parameters = "\"C:\\VFP ReportDesign\\Reports\\demo2.frx\" \"C:\\VFP ReportDesign\\data\\demo.dbf\"";
+
+    // 定义 EXE 文件所在目录
+    LPCSTR exeDirectory = "C:\\VFP ReportDesign";
+
+    // 调用 ShellExecute 函数执行 EXE 文件
+    RetVal = ShellExecute(NULL, "open", exePath, parameters, exeDirectory, SW_SHOW);
+
+    return 0;
+}
+```
+**VB.NET 的调用方式：**
+```vbnet
+Imports System.Diagnostics
+
+Public Class Form1
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        ' 定义 EXE 文件路径
+        Dim exePath As String = "reportdesign.exe"
+        ' 定义 EXE 文件所在目录
+        Dim exeDirectory As String = "C:\VFP ReportDesign"
+        ' 定义参数，不传递任何参数
+        Dim parametersRelative As String = ""
+        ' 定义参数，使用相对路径
+        ' Dim parametersRelative As String = """Reports\demo2.frx"" ""data\demo.dbf"""
+        ' 定义参数，使用绝对路径
+        ' Dim parametersAbsolute As String = """C:\VFP ReportDesign\Reports\demo2.frx"" ""C:\VFP ReportDesign\data\demo.dbf"""
+
+        ' 创建 ProcessStartInfo 对象
+        Dim startInfo As New ProcessStartInfo(exePath)
+
+        ' 设置工作目录为 EXE 文件所在目录
+        startInfo.WorkingDirectory = exeDirectory
+
+        ' 使用相对路径执行 EXE 文件
+        startInfo.Arguments = parametersRelative
+        Process.Start(startInfo)
+
+        ' 使用绝对路径执行 EXE 文件
+        ' startInfo.Arguments = parametersAbsolute
+        ' Process.Start(startInfo)
+    End Sub
+End Class
+```
+**C# 的调用方式：**
+```csharp
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Diagnostics;
+
+namespace demo
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // 定义 EXE 文件路径
+            string exePath = @"C:\VFP ReportDesign\reportdesign.exe";
+            // 定义 EXE 文件所在目录
+            string exeDirectory = @"C:\VFP ReportDesign";
+            // 定义参数，无参数
+            string parametersRelative = @"";
+            // 定义参数，使用相对路径
+            // string parametersRelative = @"""Reports\demo2.frx"" ""data\demo.dbf""";
+            // 定义参数，使用绝对路径
+            // string parametersAbsolute = @"""C:\VFP ReportDesign\Reports\demo2.frx"" ""C:\VFP ReportDesign\data\demo.dbf""";
+
+            // 创建 ProcessStartInfo 对象
+            ProcessStartInfo startInfo = new ProcessStartInfo(exePath);
+
+            // 设置工作目录为 EXE 文件所在目录
+            startInfo.WorkingDirectory = exeDirectory;
+
+            // 使用相对路径执行 EXE 文件
+            startInfo.Arguments = parametersRelative;
+            Process.Start(startInfo);
+
+            // 使用绝对路径执行 EXE 文件
+            // startInfo.Arguments = parametersAbsolute;
+            // Process.Start(startInfo);
+        }
+    }
+}
+
+```
+
 ## 可选组件为 FoxyPreviewer 。如需使用，解压 FoxyPreviewer.rar 即可(ver:v299z38)。也可将最新版本的 FoxyPreviewer 置于文件夹中。
 
 # 缘由：
