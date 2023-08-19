@@ -9,13 +9,17 @@
 
 **报表存储格式：** **frx**(VFP语言特有的报表格式，本质仍旧是一个dbf)
 
-**报表输出格式：** 使用第三方的 FoxyPreviewer,支持输出：
+**报表输出格式：** 使用第三方的 FoxyPreviewer,支持输出（ver:v299z38）：
 1. 图片(PNG/BMP/JPG/GIF/TIF/EMF)
 2. PDF
 3. WORD(RTF/DOC)
 4. EXCEL(XLS/XML)
 5. HTML(HTM/HTML)
 6. MHTML(MHT/MHTML)
+
+且可以将输出（格式：PDF、RTF、XLS、XML、HTML、TIF）作为邮件附件自动或手动发出。
+
+（更高版本的 FoxyPreviewer 仍旧支持，需自行下载或购买《传说自 3.0 版本开始闭源收费》）
 
 **报表数据源：** dbf 或者可以通过 ODBC/OLE DB 连接的关系数据库（例如 SQL Server/MySQL），JSON/XML 格式的数据源将列入开发计划，敬请期待！
 
