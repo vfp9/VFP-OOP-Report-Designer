@@ -1,15 +1,15 @@
 # VFP-OOP-Report-Designer
 世界第一款完全面向对象的VFP报表设计器。
 
-开发语言及版本：VFP9 SP2 7423
+**开发语言及版本：**VFP9 SP2 7423
 
-OS: WIN10 21H2
+**OS: **WIN10 21H2
 
-应用环境：可独立使用，亦可在程序语言（**包括但不限于** VFP、VB6、VC++、VB.NET、C#等）中进行调用用以制作或修改报表。换句话说，**可以执行 32 位可执行程序并传递相关参数的语言均可使用**。
+**应用环境：**可独立使用，亦可在程序语言（**包括但不限于** VFP、VB6、VC++、VB.NET、C#等）中进行调用用以制作或修改报表。换句话说，**可以执行 32 位可执行程序并传递相关参数的语言均可使用**。
 
-报表存储格式：**frx**(VFP语言特有的报表格式，本质仍旧是一个dbf)
+**报表存储格式：** **frx**(VFP语言特有的报表格式，本质仍旧是一个dbf)
 
-报表输出格式：使用第三方的 FoxyPreviewer,支持输出：
+**报表输出格式：** 使用第三方的 FoxyPreviewer,支持输出：
 1. 图片(PNG/BMP/JPG/GIF/TIF/EMF)
 2. PDF
 3. WORD(RTF/DOC)
@@ -17,7 +17,7 @@ OS: WIN10 21H2
 5. HTML(HTM/HTML)
 6. MHTML(MHT/MHTML)
 
-报表数据源：dbf 或者可以通过 ODBC/OLE DB 连接的关系数据库（例如 SQL Server/MySQL），JSON/XML 格式的数据源将列入开发计划，敬请期待！
+**报表数据源：** dbf 或者可以通过 ODBC/OLE DB 连接的关系数据库（例如 SQL Server/MySQL），JSON/XML 格式的数据源将列入开发计划，敬请期待！
 
 ![](β1.0.34.gif)
 
