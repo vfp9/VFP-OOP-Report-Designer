@@ -34,16 +34,14 @@
 | 参数 | 描述                    |
 |-------------------|--------------------------------|
 |tcFrxName | 字符型，可选参数，需要打开的报表文件名 |
-|tcCursorList | 字符型，可选参数，与 tcFrxName 对应的数据源列表，cursor 暂不支持！(dbf   注：可以带路径，包括相对路径，表以共享方式打开) |
-|tcSelect | 字符型，可选参数，与 tcFrxName 对应的用于生成 Cursor 的 Select 语句（暂时不支持） |
-|tcConnectionString | 字符型，可选参数，可以建立远程连接的连接字符串（暂时不支持） |
+|tcCursorList | 字符型，可选参数，与 tcFrxName 对应的数据源列表，dbf物理文件需要加扩展名，支持 cursor ！(dbf   注：可以带路径，包括相对路径，表以共享方式打开)，如果是多个 dbf 或者 Cursor，需要用英文 , 号进行分隔 |
+|tcSelect | 字符型，可选参数，与 tcFrxName 对应的用于生成 Cursor 的 Select 语句或远程数据库支持的存储过程，如果要生成多个 Cursor，语句之间用英文 ; 号间隔 |
+|tcConnectionString | 字符型，可选参数，可以建立远程连接的 ODBC 连接字符串（OLE DB 连接暂时不支持） |
 |tnDesignMode | 数值型，可选参数，设计模式，可选值：  1 - 报表模式；2 - 所见即所得 (值 2 暂时不支持)  |
 |tcSetDate | 字符型，可选参数，报表需要使用的 Set([Date]) 值:AMERICAN、ANSI、BRITISH、FRENCH、GERMAN、ITALIAN、JAPAN、TAIWAN、USA、MDY、DMY、YMD、SHORT、LONG（https://learn.microsoft.com/zh-cn/previous-versions/visualstudio/foxpro/xy88756b(v=vs.80)） |
 |tcCurrency | 字符型，可选参数，报表需要使用的 Set("Currency", 1) 值，参阅：https://learn.microsoft.com/zh-cn/previous-versions/visualstudio/foxpro/5fybyh55(v=vs.71) |
 
 #### 示例：
-1. 数据源类型为 dbf
-   
 **VFP 的调用方式：**
 ```foxpro
 Private lnReturn, lpszDir, lpszFile, lpszOpen, lpszParams, fsShowCMD, HWnd
@@ -242,7 +240,7 @@ VFP 固有的报表设计器，从 VFP3 已经定型了。至 VFP9，功能改�
 # 已实现设计目标：
 1. 它是对象化的。
 2. 对于 VFP，它可以平滑替代 VFP 固有的报表设计器，学习成本几乎为 0。
-3. 对于非 VFP 语言，学习难度试个人能力而定。
+3. 对于非 VFP 语言，学习难度视个人能力而定。
 4. 提供了一个相对现代的设计 UI。
 5. 它在设计报表时是可缩放的，当然，也可以在缩放状态下进行设计，虽然后一个设计方法是我个人不建议的，因为在缩放状态下的设计，报表控件的定位会有可以理解的“偏差”。
 6. 在设计报表时，更改“默认打印机”、更改纸张方向或者更改纸型，报表已有布局会自动调整而无需手工操作。
@@ -257,6 +255,12 @@ VFP 固有的报表设计器，从 VFP3 已经定型了。至 VFP9，功能改�
 3. 真正的所见即所得
 
 # 更新历史  
+**2023.08.20**
+
+版本：β1.0.35
+
+增加：支持使用 ODBC 连接
+
 **2023.08.18**
 
 版本：β1.0.34
