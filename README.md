@@ -34,8 +34,8 @@
 |tcSelect | 字符型，可选参数，与 tcFrxName 对应的用于生成 Cursor 的 Select 语句（暂时不支持） |
 |tcConnectionString | 字符型，可选参数，可以建立远程连接的连接字符串（暂时不支持） |
 |tnDesignMode | 数值型，可选参数，设计模式，可选值：  1 - 报表模式；2 - 所见即所得 (值 2 暂时不支持)  |
-|tcSetDate | 字符型，可选参数，报表需要使用的 Set([Date]) 值 |
-|tcCurrency | 字符型，可选参数，报表需要使用的 Set("Currency", 1) 值 |
+|tcSetDate | 字符型，可选参数，报表需要使用的 Set([Date]) 值:AMERICAN、ANSI、BRITISH、FRENCH、GERMAN、ITALIAN、JAPAN、TAIWAN、USA、MDY、DMY、YMD、SHORT、LONG（https://learn.microsoft.com/zh-cn/previous-versions/visualstudio/foxpro/xy88756b(v=vs.80)） |
+|tcCurrency | 字符型，可选参数，报表需要使用的 Set("Currency", 1) 值，参阅：https://learn.microsoft.com/zh-cn/previous-versions/visualstudio/foxpro/5fybyh55(v=vs.71) |
 
 #### 示例：
 1. 数据源类型为 dbf
