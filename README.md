@@ -9,6 +9,14 @@ OS: WIN10 21H2
 
 报表存储格式：**frx**(VFP语言特有的报表格式，本质仍旧是一个dbf)
 
+报表输出格式：使用第三方的 FoxyPreviewer,支持输出：
+1. 图片(PNG/BMP/JPG/GIF/TIF/EMF)
+2. PDF
+3. WORD(RTF/DOC)
+4. EXCEL(XLS/XML)
+5. HTML(HTM/HTML)
+6. MHTML(MHT/MHTML)
+
 报表数据源：dbf 或者可以通过 ODBC/OLE DB 连接的关系数据库（例如 SQL Server/MySQL），JSON/XML 格式的数据源将列入开发计划，敬请期待！
 
 ![](β1.0.34.gif)
