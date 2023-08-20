@@ -36,7 +36,7 @@
 |tcFrxName | 字符型，可选参数，需要打开的报表文件名 |
 |tcCursorList | 字符型，可选参数，与 tcFrxName 对应的数据源列表，dbf物理文件需要加扩展名，支持 cursor ！(dbf   注：可以带路径，包括相对路径，表以共享方式打开)，如果是多个 dbf 或者 Cursor，需要用英文 , 号进行分隔 |
 |tcSelect | 字符型，可选参数，与 tcFrxName 对应的用于生成 Cursor 的 Select 语句或远程数据库支持的存储过程，如果要生成多个 Cursor，语句之间用英文 ; 号间隔 |
-|tcConnectionString | 字符型，可选参数，可以建立远程连接的 ODBC 连接字符串（OLE DB 连接暂时不支持） |
+|tcConnectionString | 字符型，可选参数，可以建立远程连接的 ODBC/OLE DB 连接字符串 |
 |tnDesignMode | 数值型，可选参数，设计模式，可选值：  1 - 报表模式；2 - 所见即所得 (值 2 暂时不支持)  |
 |tcSetDate | 字符型，可选参数，报表需要使用的 Set([Date]) 值:AMERICAN、ANSI、BRITISH、FRENCH、GERMAN、ITALIAN、JAPAN、TAIWAN、USA、MDY、DMY、YMD、SHORT、LONG（https://learn.microsoft.com/zh-cn/previous-versions/visualstudio/foxpro/xy88756b(v=vs.80)） |
 |tcCurrency | 字符型，可选参数，报表需要使用的 Set("Currency", 1) 值，参阅：https://learn.microsoft.com/zh-cn/previous-versions/visualstudio/foxpro/5fybyh55(v=vs.71) |
@@ -255,6 +255,12 @@ VFP 固有的报表设计器，从 VFP3 已经定型了。至 VFP9，功能改�
 3. 真正的所见即所得
 
 # 更新历史  
+**2023.08.20**
+
+版本：β1.0.36
+
+增加：支持使用 OLE DB 连接
+
 **2023.08.20**
 
 版本：β1.0.35
