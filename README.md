@@ -5,7 +5,7 @@
 
 **OS:** WIN10 21H2
 
-**应用环境：** 可独立使用，亦可在程序语言（**包括但不限于** VFP、VB6、VC++、VB.NET、C#等）中进行调用用以制作或修改报表。换句话说，**可以执行 32 位可执行程序并传递相关参数的语言均可使用**。
+**应用环境：** 可独立使用，亦可在程序语言（**包括但不限于** VFP、VB6、VC++、VB.NET、C#、JS等）中进行调用用以制作或修改报表。换句话说，**可以执行 32 位可执行程序并传递相关参数的语言均可使用**。
 
 **报表存储格式：** **frx**(VFP语言特有的报表格式，本质仍旧是一个dbf)
 
@@ -213,6 +213,25 @@ namespace demo
 }
 
 ```
+**JS调用方法示例**
+```javascript
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>通过 IE 调用 VFP OOP 报表设计器</title>
+	</head>
+	<body>
+		<button onclick=test() type="button">打开 VFP OOP 报表设计器</button>
+		<script>
+			function test(){
+				var Shell = new ActiveXObject("WScript.Shell"); 
+				Shell.Run('f:\\release\\reportdesign.exe',0,true);
+			}
+		</script>
+	</body>
+</html>
+```
 
 ## 可选组件为 FoxyPreviewer 。如需使用，解压 FoxyPreviewer.rar 即可(ver:v299z38)。也可将最新版本的 FoxyPreviewer 置于文件夹中。
 
@@ -255,6 +274,14 @@ VFP 固有的报表设计器，从 VFP3 已经定型了。至 VFP9，功能改�
 3. 真正的所见即所得
 
 # 更新历史  
+**2023.08.25**
+
+版本：β1.0.40
+
+修改：
+1. 优化打开不同的报表时，ODBC连接不用重复创建
+2. 修正其他语言打开软件时可能出错的问题
+
 **2023.08.24**
 
 版本：β1.0.39
